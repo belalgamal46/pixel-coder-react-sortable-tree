@@ -194,8 +194,8 @@ class ReactSortableTree extends Component {
 
     instanceProps.searchQuery = nextProps.searchQuery;
     instanceProps.searchFocusOffset = nextProps.searchFocusOffset;
-    newState.instanceProps = {...instanceProps, ...newState.instanceProps };
- 
+    newState.instanceProps = { ...instanceProps, ...newState.instanceProps };
+
     return newState;
   }
 
@@ -230,7 +230,9 @@ class ReactSortableTree extends Component {
     // it means that the drag was canceled or the dragSource dropped
     // elsewhere, and we should reset the state of this tree
     if (!monitor.isDragging() && this.state.draggingTreeData) {
-      setTimeout(() => {this.endDrag()});
+      setTimeout(() => {
+        this.endDrag();
+      });
     }
   }
 
@@ -948,11 +950,7 @@ const SortableTreeWithoutDndContext = props => (
   </DndContext.Consumer>
 );
 
-const SortableTree = props => (
-  <DndProvider backend={HTML5Backend}>
-    <SortableTreeWithoutDndContext {...props} />
-  </DndProvider>
-);
+const SortableTree = props => <SortableTreeWithoutDndContext {...props} />;
 
 // Export the tree component without the react-dnd DragDropContext,
 // for when component is used with other components using react-dnd.
