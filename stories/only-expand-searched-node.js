@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import SortableTree from '../src';
 // In your own app, you would need to use import styles once in the app
 // import 'react-sortable-tree/styles.css';
@@ -121,39 +123,41 @@ export default class App extends Component {
         </form>
 
         <div style={{ height: 300 }}>
-          <SortableTree
-            treeData={this.state.treeData}
-            onChange={treeData => this.setState({ treeData })}
-            //
-            // Custom comparison for matching during search.
-            // This is optional, and defaults to a case sensitive search of
-            // the title and subtitle values.
-            // see `defaultSearchMethod` in https://github.com/frontend-collective/react-sortable-tree/blob/master/src/utils/default-handlers.js
-            searchMethod={customSearchMethod}
-            //
-            // The query string used in the search. This is required for searching.
-            searchQuery={searchString}
-            //
-            // When matches are found, this property lets you highlight a specific
-            // match and scroll to it. This is optional.
-            searchFocusOffset={searchFocusIndex}
-            //
-            // This callback returns the matches from the search,
-            // including their `node`s, `treeIndex`es, and `path`s
-            // Here I just use it to note how many matches were found.
-            // This is optional, but without it, the only thing searches
-            // do natively is outline the matching nodes.
-            searchFinishCallback={matches =>
-              this.setState({
-                searchFoundCount: matches.length,
-                searchFocusIndex:
-                  matches.length > 0 ? searchFocusIndex % matches.length : 0,
-              })
-            }
-            //
-            // This prop only expands the nodes that are seached.
-            onlyExpandSearchedNodes
-          />
+          <DndProvider backend={HTML5Backend}>
+            <SortableTree
+              treeData={this.state.treeData}
+              onChange={treeData => this.setState({ treeData })}
+              //
+              // Custom comparison for matching during search.
+              // This is optional, and defaults to a case sensitive search of
+              // the title and subtitle values.
+              // see `defaultSearchMethod` in https://github.com/frontend-collective/react-sortable-tree/blob/master/src/utils/default-handlers.js
+              searchMethod={customSearchMethod}
+              //
+              // The query string used in the search. This is required for searching.
+              searchQuery={searchString}
+              //
+              // When matches are found, this property lets you highlight a specific
+              // match and scroll to it. This is optional.
+              searchFocusOffset={searchFocusIndex}
+              //
+              // This callback returns the matches from the search,
+              // including their `node`s, `treeIndex`es, and `path`s
+              // Here I just use it to note how many matches were found.
+              // This is optional, but without it, the only thing searches
+              // do natively is outline the matching nodes.
+              searchFinishCallback={matches =>
+                this.setState({
+                  searchFoundCount: matches.length,
+                  searchFocusIndex:
+                    matches.length > 0 ? searchFocusIndex % matches.length : 0,
+                })
+              }
+              //
+              // This prop only expands the nodes that are seached.
+              onlyExpandSearchedNodes
+            />
+          </DndProvider>
         </div>
       </div>
     );

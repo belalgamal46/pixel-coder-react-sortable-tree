@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import SortableTree from '../src';
 // In your own app, you would need to use import styles once in the app
 // import 'react-sortable-tree/styles.css';
@@ -32,12 +34,14 @@ class App extends Component {
             border: 'solid black 1px',
           }}
         >
-          <SortableTree
-            treeData={this.state.treeData1}
-            onChange={treeData1 => this.setState({ treeData1 })}
-            dndType={externalNodeType}
-            shouldCopyOnOutsideDrop={shouldCopyOnOutsideDrop}
-          />
+          <DndProvider backend={HTML5Backend}>
+            <SortableTree
+              treeData={this.state.treeData1}
+              onChange={treeData1 => this.setState({ treeData1 })}
+              dndType={externalNodeType}
+              shouldCopyOnOutsideDrop={shouldCopyOnOutsideDrop}
+            />
+          </DndProvider>
         </div>
 
         <div
@@ -48,12 +52,14 @@ class App extends Component {
             border: 'solid black 1px',
           }}
         >
-          <SortableTree
-            treeData={this.state.treeData2}
-            onChange={treeData2 => this.setState({ treeData2 })}
-            dndType={externalNodeType}
-            shouldCopyOnOutsideDrop={shouldCopyOnOutsideDrop}
-          />
+          <DndProvider backend={HTML5Backend}>
+            <SortableTree
+              treeData={this.state.treeData2}
+              onChange={treeData2 => this.setState({ treeData2 })}
+              dndType={externalNodeType}
+              shouldCopyOnOutsideDrop={shouldCopyOnOutsideDrop}
+            />
+          </DndProvider>
         </div>
 
         <div style={{ clear: 'both' }} />
