@@ -18,7 +18,8 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "storybook": "start-storybook -p ${PORT:-3001} -h 0.0.0.0",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "watch": "rollup -c --watch"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
