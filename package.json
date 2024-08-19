@@ -2,6 +2,9 @@
   "name": "@pixel-coder/react-sortable-tree",
   "version": "2.8.0",
   "description": "Drag-and-drop sortable component for nested data and hierarchies",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "yarn run lint && yarn run clean",
     "build": "rollup -c",
